@@ -1,0 +1,20 @@
+import os
+
+mycontent = os.environ
+file = "F:\\PY\\mydoc.txt"
+
+try:
+    doc = open(file, "x")
+except:
+    doc = open(file, "w")
+
+for key, path in mycontent.items():
+    myline = key + ":" + path
+    doc.write(myline + """)
+""")
+
+doc.close()
+doc = open(file, "r")
+
+for x in doc:
+       print(x)
