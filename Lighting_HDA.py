@@ -23,6 +23,9 @@ group = node.parmTemplateGroup()
 folder = hou.FolderParmTemplate("folder", "THREE POINT LIGHT CONTROL")
 folderSettings = hou.FolderParmTemplate("folderSettings", "Settings")
 #create a float slider
+light_position = hou.FloatParmTemplate("light_position", "Light Position", 1, (1, 0, 0),0,10)
+
+
 intensity = hou.FloatParmTemplate("intensity", "Intensity", 1, (1, 0, 0),0,10)
 exposure = hou.FloatParmTemplate("exposure", "Exposure", 1, (0, 0, 0),0,10)
 enable = hou.ToggleParmTemplate("enable", "Enable",1, help = "Enable all my lights")
@@ -32,6 +35,8 @@ color = hou.FloatParmTemplate("color", "Color", 3, default_value=(1, 1, 1), look
 
 #Add intensity to folder
 folder.addParmTemplate(enable)
+folderSettings.addParmTemplate(light_position)
+
 folderSettings.addParmTemplate(intensity)
 folderSettings.addParmTemplate(exposure)
 folderSettings.addParmTemplate(radius)
@@ -55,6 +60,11 @@ node.replaceSpareParmTuple(folderSettings.name(), folderSettings)
 
 ###
 for lgt in node.children():
+
+
+    lgt.parm("ty").setExpression('ch("../light_position")')
+
+
     lgt.parm("light_intensity").setExpression('ch("../intensity")')
     lgt.parm("light_exposure").setExpression('ch("../exposure")')
     lgt.parm("light_enable").setExpression('ch("../enable")')
@@ -65,4 +75,3 @@ for lgt in node.children():
     
     lgt.parm("areasize1").setExpression('ch("../radiusx")')
     lgt.parm("areasize2").setExpression('ch("../radiusy")')
-
