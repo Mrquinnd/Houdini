@@ -5,7 +5,7 @@ import os
 textureChannels = ['BaseColor', 'Roughness', 'Height', 'Opacity', 'Metalness']
 
 #set the base name with prompt ("ex: watch_v2_wood")
-baseName = hou.ui.readInput( initial_contents="mymaterial_wood" , message="Set the base object name", buttons= ["Save","Cancel"], title="Object BaseName")
+baseName = hou.ui.readInput( initial_contents="Rover4OutsideUVOnly" , message="Set the base object name", buttons= ["Save","Cancel"], title="Object BaseName")
 #print(baseName)
 
 if baseName[0]==0 and baseName[1] != '' :
@@ -23,3 +23,13 @@ if baseName[0]==0 and baseName[1] != '' :
     
     UVNode = selection.createNode("mtlxtexcoord","UVS")
     UVNode.parm("signature").set("vector2")
+    
+    for texture in os.listdir(pathToTextures):
+        for channel in textureChannels:
+            if baseName[1] in texture and channel in texture:
+                print(texture)
+
+    
+    print(pathToTextures)
+    
+    print(currentproject)
