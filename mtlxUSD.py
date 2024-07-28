@@ -23,4 +23,12 @@ else:
     context = selection.parent()
     
     materialx = selection.createNode("mtlxstandard_surface", "_mtlx")
+    texture_node = material_library_node.createNode("usduvtexture", "Diffuse")
+ 
+
+# Layout the new nodes
+material_library_node.layoutChildren()
+
+print("Node creation and layout complete.")
     
+selection.layoutChildren()
